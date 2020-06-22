@@ -7,6 +7,7 @@ void selection_sort(roba);
 void bubble_sort(roba);
 void insertion_sort(roba);
 void quicksort(robissima);
+void mergesort(int *vec, size_t len);
 
 int main() {
 
@@ -28,8 +29,43 @@ int main() {
 
 }
 
-void mergesort() {}
+void mergesort(int *vec, size_t len) {
+	if (len == 1) return; // un elemento solo è un vettore ordinato
+	mergesort(vec, len / 2); // ordina la prima metà
+	mergesort(vec + len/2, len - (len/2)); // ordina la seconda metà
 
+	/* La fase "merge" funziona così: abbiamo due vettori che
+	 * supponiamo siano ordinati, uno va da 0 a len/2-1 e l'altro
+	 * da len/2 alla fine del nostro vettore. Per unirli in un vettore
+	 * ordinato lungo len confrontiamo il primo el. del primo vec
+	 * col primo del secondo vec e mettiamo il minore nella prima posizione,
+	 * la posizione da studiare nel vettore da cui abbiamo preso quell'elemento
+	 * viene incrementata, si incrementa l'indice a cui inserire l'elemento
+	 * nel vec temporaneo e si va avanti fino a quando non abbiamo usato tutti
+	 * gli elementi in entrambi i vettori per formare un vettore unito (vmerge)
+	 * lungo len, che quindi va nelle posizioni da 0 a len del vettore di partenza
+	 */
+	int *vmerge = malloc(len * sizeof(int));
+	size_t index = 0;  // indice da usare per vmerge
+	size_t i = 0, j = len/2; // i è l'indice del vettore da 0 a len/2-1, j per quello da len/2 a len-1
+	while (i < len / 2 && j < len) {  // prendiamo i più piccoli tra  i due vettori come spiegato nel commento grande
+		if (vec[i] < vec[j]) vmerge[index++] = vec[i++];
+		else vmerge[index++] = vec[j++];
+	}
+	/* Dobbiamo usare tutti i dati rimasti prima o poi,
+	 * e può accadere che in uno dei due ne sono rimasti parecchi,
+	 * e in ogni caso li prendiamo in ordine visto che uno dei vettori
+	 * già abbiamo finito di utilizzarlo (come da cond del while di sopra)
+	 * e quindi dobbiamo utilizzare tutto quello che è rimasto nell'altro
+	 */
+	while(index < len) 
+		if (i < len / 2) vmerge[index++] = vec[i++];
+		else if (j < len) vmerge[index++] = vec[j++];
+
+	for (size_t i = 0; i < len; i++)
+		vec[i] = vmerge[i]; // copiamo il vettore merged nel vettore serio
+	free(vmerge); // era solo una cosa temporanea
+}
 void quicksort(robissima) {
 
 	/* 
