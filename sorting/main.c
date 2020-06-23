@@ -15,10 +15,11 @@ int main() {
 	// selection_sort(array, 5);
 	// bubble_sort(array, 5);
 	// insertion_sort(array, 5);
-	quicksort(array, 0, 5 - 1);
-
-	// non ho voglia di fare il merge sortttttttttttt ufffff troppo lungo e complesso
-
+	// quicksort(array, 0, 5 - 1);
+	mergesort(array, 5);
+	
+	// ma grazie carzaccolo
+	
 	for (int i = 0; i < 5; i++) {
 
 		printf("%d ", array[i]);
