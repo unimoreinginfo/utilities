@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
-#define roba int* array, unsigned int array_size
+#define roba int* array, size_t array_size
 #define robissima int* array, int first, int last
 
 void selection_sort(roba);
 void bubble_sort(roba);
 void insertion_sort(roba);
 void quicksort(robissima);
-void mergesort(int *vec, size_t len);
+void mergesort(roba);
 
 int main() {
 
@@ -29,7 +29,7 @@ int main() {
 
 }
 
-void mergesort(int *vec, size_t len) {
+void mergesort(roba) {
 	if (len == 1) return; // un elemento solo è un vettore ordinato
 	mergesort(vec, len / 2); // ordina la prima metà
 	mergesort(vec + len/2, len - (len/2)); // ordina la seconda metà
