@@ -36,20 +36,20 @@ void mergesort(roba) {
 	mergesort(array + array_size/2, array_size - (array_size/2)); // ordina la seconda metà
 
 	/* La fase "merge" funziona così: abbiamo due vettori che
-	 * supponiamo siano ordinati, uno va da 0 a len/2-1 e l'altro
-	 * da len/2 alla fine del nostro vettore. Per unirli in un vettore
-	 * ordinato lungo len confrontiamo il primo el. del primo vec
+	 * supponiamo siano ordinati, uno va da 0 a array_size/2-1 e l'altro
+	 * da array_size/2 alla fine del nostro vettore. Per unirli in un vettore
+	 * ordinato lungo array_size confrontiamo il primo el. del primo vec
 	 * col primo del secondo vec e mettiamo il minore nella prima posizione,
 	 * la posizione da studiare nel vettore da cui abbiamo preso quell'elemento
 	 * viene incrementata, si incrementa l'indice a cui inserire l'elemento
 	 * nel vec temporaneo e si va avanti fino a quando non abbiamo usato tutti
 	 * gli elementi in entrambi i vettori per formare un vettore unito (vmerge)
-	 * lungo len, che quindi va nelle posizioni da 0 a len del vettore di partenza
+	 * lungo array_size, che quindi va nelle posizioni da 0 a array_size del vettore di partenza
 	 */
 	int *vmerge = malloc(array_size * sizeof(int));
 	size_t index = 0;  // indice da usare per vmerge
-	size_t i = 0, j = array_size/2; // i è l'indice del vettore da 0 a len/2-1, j per quello da len/2 a len-1
-	while (i < len / 2 && j < len) {  // prendiamo i più piccoli tra  i due vettori come spiegato nel commento grande
+	size_t i = 0, j = array_size/2; // i è l'indice del vettore da 0 a array_size/2-1, j per quello da array_size/2 a array_size-1
+	while (i < array_size / 2 && j < array_size) {  // prendiamo i più piccoli tra  i due vettori come spiegato nel commento grande
 		if (array[i] < array[j]) vmerge[index++] = array[i++];
 		else vmerge[index++] = array[j++];
 	}
