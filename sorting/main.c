@@ -31,9 +31,9 @@ int main() {
 }
 
 void mergesort(roba) {
-	if (len == 1) return; // un elemento solo è un vettore ordinato
-	mergesort(array, len / 2); // ordina la prima metà
-	mergesort(array + len/2, len - (len/2)); // ordina la seconda metà
+	if (array_size == 1) return; // un elemento solo è un vettore ordinato
+	mergesort(array, array_size / 2); // ordina la prima metà
+	mergesort(array + array_size/2, array_size - (array_size/2)); // ordina la seconda metà
 
 	/* La fase "merge" funziona così: abbiamo due vettori che
 	 * supponiamo siano ordinati, uno va da 0 a len/2-1 e l'altro
@@ -46,9 +46,9 @@ void mergesort(roba) {
 	 * gli elementi in entrambi i vettori per formare un vettore unito (vmerge)
 	 * lungo len, che quindi va nelle posizioni da 0 a len del vettore di partenza
 	 */
-	int *vmerge = malloc(len * sizeof(int));
+	int *vmerge = malloc(array_size * sizeof(int));
 	size_t index = 0;  // indice da usare per vmerge
-	size_t i = 0, j = len/2; // i è l'indice del vettore da 0 a len/2-1, j per quello da len/2 a len-1
+	size_t i = 0, j = array_size/2; // i è l'indice del vettore da 0 a len/2-1, j per quello da len/2 a len-1
 	while (i < len / 2 && j < len) {  // prendiamo i più piccoli tra  i due vettori come spiegato nel commento grande
 		if (array[i] < array[j]) vmerge[index++] = array[i++];
 		else vmerge[index++] = array[j++];
@@ -59,11 +59,11 @@ void mergesort(roba) {
 	 * già abbiamo finito di utilizzarlo (come da cond del while di sopra)
 	 * e quindi dobbiamo utilizzare tutto quello che è rimasto nell'altro
 	 */
-	while(index < len) 
-		if (i < len / 2) vmerge[index++] = array[i++];
-		else if (j < len) vmerge[index++] = array[j++];
+	while(index < array_size) 
+		if (i < array_size / 2) vmerge[index++] = array[i++];
+		else if (j < array_size) vmerge[index++] = array[j++];
 
-	for (size_t i = 0; i < len; i++)
+	for (size_t i = 0; i < array_size; i++)
 		array[i] = vmerge[i]; // copiamo il vettore merged nel vettore serio
 	free(vmerge); // era solo una cosa temporanea
 }
