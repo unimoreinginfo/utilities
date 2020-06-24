@@ -32,8 +32,8 @@ int main() {
 
 void mergesort(roba) {
 	if (len == 1) return; // un elemento solo è un vettore ordinato
-	mergesort(vec, len / 2); // ordina la prima metà
-	mergesort(vec + len/2, len - (len/2)); // ordina la seconda metà
+	mergesort(array, len / 2); // ordina la prima metà
+	mergesort(array + len/2, len - (len/2)); // ordina la seconda metà
 
 	/* La fase "merge" funziona così: abbiamo due vettori che
 	 * supponiamo siano ordinati, uno va da 0 a len/2-1 e l'altro
@@ -50,8 +50,8 @@ void mergesort(roba) {
 	size_t index = 0;  // indice da usare per vmerge
 	size_t i = 0, j = len/2; // i è l'indice del vettore da 0 a len/2-1, j per quello da len/2 a len-1
 	while (i < len / 2 && j < len) {  // prendiamo i più piccoli tra  i due vettori come spiegato nel commento grande
-		if (vec[i] < vec[j]) vmerge[index++] = vec[i++];
-		else vmerge[index++] = vec[j++];
+		if (array[i] < array[j]) vmerge[index++] = array[i++];
+		else vmerge[index++] = array[j++];
 	}
 	/* Dobbiamo usare tutti i dati rimasti prima o poi,
 	 * e può accadere che in uno dei due ne sono rimasti parecchi,
@@ -60,11 +60,11 @@ void mergesort(roba) {
 	 * e quindi dobbiamo utilizzare tutto quello che è rimasto nell'altro
 	 */
 	while(index < len) 
-		if (i < len / 2) vmerge[index++] = vec[i++];
-		else if (j < len) vmerge[index++] = vec[j++];
+		if (i < len / 2) vmerge[index++] = array[i++];
+		else if (j < len) vmerge[index++] = array[j++];
 
 	for (size_t i = 0; i < len; i++)
-		vec[i] = vmerge[i]; // copiamo il vettore merged nel vettore serio
+		array[i] = vmerge[i]; // copiamo il vettore merged nel vettore serio
 	free(vmerge); // era solo una cosa temporanea
 }
 void quicksort(robissima) {
@@ -87,10 +87,11 @@ void quicksort(robissima) {
 		i = first;
 		j = last;
 		pivot = (i + j) / 2;
+		int val = array[pivot];
 		do {
 
-			while (array[i] > array[pivot]) i++;
-			while (array[j] < array[pivot]) j--;
+			while (array[i] > val) i++;
+			while (array[j] < val) j--;
 			if (i <= j) {
 				int tmp = array[i];
 				array[i] = array[j];
