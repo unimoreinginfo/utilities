@@ -194,20 +194,18 @@ void insertion_sort(roba) {
 		il metodo funziona perché array[i] conterrà il massimo trovato fino a quel momento
 
 	*/
+	int k;
+	for (int i = 1; i < array_size; i++) {
 
-	for (int i = 0; i < array_size; i++) {
+		int tmp = array[i];
 
-		for (int k = i; k < array_size; k++) {
+		for (k = i - 1; (k >= 0) && (array[k] < tmp); k--) {
 
-			if (array[i] < array[k]) {
-
-				int tmp = array[i];
-				array[i] = array[k];
-				array[k] = tmp;
-
-			}
+			array[k + 1] = array[k];
 
 		}
+
+		array[k + 1] = tmp;
 
 	}
 
